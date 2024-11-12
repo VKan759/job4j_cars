@@ -9,6 +9,7 @@ public class Category {
     @Getter
     @EqualsAndHashCode.Include
     private int id;
+
     @Getter
     @Setter
     private String name;
