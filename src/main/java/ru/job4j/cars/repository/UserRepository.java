@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import ru.job4j.cars.model.User;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,16 +21,14 @@ public class UserRepository {
      */
     public User create(User user) {
         Session session = sf.openSession();
-        User result;
+        User result = null;
         try {
             session.beginTransaction();
-            Serializable saved = session.save(user);
-            user.setId((Integer) saved);
+            session.save(user);
             result = user;
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
-            result = null;
         } finally {
             session.close();
         }
@@ -108,19 +105,19 @@ public class UserRepository {
      */
     public Optional<User> findById(int userId) {
         Session session = sf.openSession();
-        User result = null;
+        Optional<User> result = Optional.empty();
         try {
             session.beginTransaction();
             Query<User> userQuery = session.createQuery("from User where id = :fId", User.class)
                     .setParameter("fId", userId);
-            result = userQuery.uniqueResult();
+            result = userQuery.uniqueResultOptional();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
         } finally {
             session.close();
         }
-        return Optional.ofNullable(result);
+        return result;
     }
 
     /**
@@ -159,8 +156,7 @@ public class UserRepository {
             session.beginTransaction();
             Query<User> userQuery = session.createQuery("from User where login = :fLogin", User.class)
                     .setParameter("fLogin", login);
-            User user = userQuery.uniqueResult();
-            result = Optional.of(user);
+            result = userQuery.uniqueResultOptional();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
