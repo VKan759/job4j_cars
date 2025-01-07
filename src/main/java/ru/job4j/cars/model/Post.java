@@ -26,7 +26,11 @@ public class Post {
     private List<PriceHistory> list = new ArrayList<>();
 
     @JoinTable(name = "participates",
-    joinColumns = {@JoinColumn(name = "post_id")},
-    inverseJoinColumns = {@JoinColumn(name = "user_id")})
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id", foreignKey = @ForeignKey(name = "car_id_fk"))
+    private Car car;
 }
