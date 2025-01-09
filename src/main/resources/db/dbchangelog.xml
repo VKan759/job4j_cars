@@ -10,5 +10,6 @@
     <include file="scripts/update_004.sql" relativeToChangelogFile="true"/>
     <include file="scripts/003_ddl_create_table_participates.sql" relativeToChangelogFile="true"/>
     <include file="scripts/005_ddl_create_tables_cars_engines_owners.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_ddl_alter_tables_car_owner.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

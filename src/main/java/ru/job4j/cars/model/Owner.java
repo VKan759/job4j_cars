@@ -18,4 +18,8 @@ public class Owner {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 }

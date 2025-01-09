@@ -1,14 +1,15 @@
 package ru.job4j.cars.model;
 
 import lombok.Data;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "engine")
 public class Engine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)

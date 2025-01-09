@@ -10,6 +10,8 @@ import java.util.Set;
 @Data
 @Table(name = "car")
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
@@ -26,4 +28,8 @@ public class Car {
                     @JoinColumn(name = "owner_id", nullable = false, updatable = false)
             })
     private Set<Owner> owners = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }
