@@ -24,4 +24,12 @@ public class PostRepository {
                 (select c.id from Car c where c.name = :carName) 
                 """, Post.class, Map.of("carName", carName));
     }
+
+    List<Post> findAllWithPhoto() {
+        return crudRepository.query("""
+                select p 
+                from Post p
+                join Photo f on f.post_id = p.id 
+                """, Post.class);
+    }
 }
